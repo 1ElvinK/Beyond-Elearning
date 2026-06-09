@@ -103,11 +103,20 @@
         passInput.value = ""; 
     }}    
     
-    function startCourse() { 
-        localStorage.setItem('vName', document.getElementById('nameInput').value);
-        document.getElementById('progressArea').classList.remove('d-none');
-        showSection('sect_A'); 
+    function startCourse() {
+    const nameInput = document.getElementById('nameInput');
+    
+    // Check if the input is empty or just contains spaces
+    if(nameInput.value.trim() === "") {
+        alert("Please enter your name to begin.");
+        nameInput.focus(); // Highlights the box for them
+        return; // Stops the function from running
     }
+    
+    localStorage.setItem('vName', nameInput.value);
+    document.getElementById('progressArea').classList.remove('d-none');
+    showSection('sect_A');}
+    
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
