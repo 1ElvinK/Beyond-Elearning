@@ -11,6 +11,7 @@
         .main-card { border-radius: 24px; border: 1px solid #e2e8f0; background: #ffffff; padding: 2rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
         .section { display: none; }
         .active { display: block; }
+        .video-desc { font-size: 0.9rem; color: #475569; margin-bottom: 10px; font-style: italic; }
         .option-box { border: 2px solid #e2e8f0; padding: 15px; margin-bottom: 10px; border-radius: 12px; cursor: pointer; transition: 0.2s; font-weight: 500; }
         .option-box:hover { border-color: var(--primary); }
         .option-box.selected { border-color: var(--primary); background: #eff6ff; font-weight: 700; color: var(--primary); }
@@ -24,8 +25,7 @@
 
     <div class="card main-card">
         <div id="progressArea" class="d-none mb-4">
-            <div id="currentTitle" class="fw-bold text-uppercase text-muted" style="font-size: 0.75rem;"></div>
-            <div class="progress mt-1" style="height: 8px;"><div id="waterLevel" class="progress-bar" style="width: 0%"></div></div>
+            <div class="progress" style="height: 8px;"><div id="waterLevel" class="progress-bar" style="width: 0%"></div></div>
         </div>
         
         <div id="sect_login" class="section active">
@@ -41,28 +41,37 @@
                 <ul class="mb-0">
                     <li>Watch each video carefully.</li>
                     <li>Answer both quiz questions by clicking the options.</li>
-                    <li>Wait for the timer to finish before proceeding.</li>
+                    <li>The "Proceed" button will unlock automatically.</li>
                 </ul>
             </div>
             <input type="text" id="nameInput" class="form-control mb-3" placeholder="Your Full Name">
             <button class="btn btn-primary w-100" onclick="startCourse()">Begin Training</button>
         </div>
 
-        <div id="sect_A" class="section"><h2 class="h5">A: Introduction</h2><div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_A" allowfullscreen></iframe></div><button id="nextBtn" class="btn btn-secondary w-100" disabled onclick="showSection('sect_B')">Wait for timer...</button></div>
+        <div id="sect_A" class="section"><h2 class="h5">A: Introduction</h2>
+            <div class="video-desc">This video provides an overview of the organization.</div>
+            <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_A" allowfullscreen></iframe></div>
+            <button id="nextBtn" class="btn btn-secondary w-100" disabled onclick="showSection('sect_B')">Please wait...</button></div>
 
-        <div id="sect_B" class="section"><h2 class="h5">B: Who do we serve?</h2><div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_B" allowfullscreen></iframe></div>
+        <div id="sect_B" class="section"><h2 class="h5">B: Who do we serve?</h2>
+            <div class="video-desc">Learn about the community members we assist.</div>
+            <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_B" allowfullscreen></iframe></div>
             <p>1. Question 1?</p><div id="group_B1"><div class="option-box" onclick="selectOpt(this, 'B1', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'B1', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'B1', 'C')">Option C</div></div>
             <p class="mt-3">2. Question 2?</p><div id="group_B2"><div class="option-box" onclick="selectOpt(this, 'B2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'B2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'B2', 'C')">Option C</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('B', 'sect_C')">Submit</button></div>
 
-        <div id="sect_C" class="section"><h2 class="h5">C: Rental Neighbourhoods</h2><div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_C" allowfullscreen></iframe></div>
+        <div id="sect_C" class="section"><h2 class="h5">C: Rental Neighbourhoods</h2>
+            <div class="video-desc">Overview of the specific areas we work in.</div>
+            <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_C" allowfullscreen></iframe></div>
             <p>1. Question 1?</p><div id="group_C1"><div class="option-box" onclick="selectOpt(this, 'C1', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'C1', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'C1', 'C')">Option C</div></div>
             <p class="mt-3">2. Question 2?</p><div id="group_C2"><div class="option-box" onclick="selectOpt(this, 'C2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'C2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'C2', 'C')">Option C</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('C', 'sect_D')">Submit</button></div>
 
         <div id="sect_D" class="section"><h2 class="h5">D: What do you see?</h2><img src="Activity.PNG" class="img-fluid my-3" onclick="handleHotspot()" style="cursor:pointer;"><button id="nextBtn" class="btn btn-secondary w-100" disabled onclick="showSection('sect_E')">Click image to unlock</button></div>
 
-        <div id="sect_E" class="section"><h2 class="h5">E: Our Approach</h2><div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_E" allowfullscreen></iframe></div>
+        <div id="sect_E" class="section"><h2 class="h5">E: Our Approach</h2>
+            <div class="video-desc">Final module covering our service strategy.</div>
+            <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_E" allowfullscreen></iframe></div>
             <p>1. Question 1?</p><div id="group_E1"><div class="option-box" onclick="selectOpt(this, 'E1', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'E1', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'E1', 'C')">Option C</div></div>
             <p class="mt-3">2. Question 2?</p><div id="group_E2"><div class="option-box" onclick="selectOpt(this, 'E2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'E2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'E2', 'C')">Option C</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('E', 'sect_F')">Submit</button></div>
@@ -72,28 +81,18 @@
 </div>
 
 <script>
-    const sectionMap = { 'sect_A': {title:'A', width:'16%', timer:10}, 'sect_B': {title:'B', width:'33%', timer:10}, 'sect_C': {title:'C', width:'50%', timer:10}, 'sect_D': {title:'D', width:'66%', timer:0}, 'sect_E': {title:'E', width:'83%', timer:10}, 'sect_F': {title:'F', width:'100%', timer:0} };
+    const sectionMap = { 'sect_A': {width:'16%', timer:10}, 'sect_B': {width:'33%', timer:10}, 'sect_C': {width:'50%', timer:10}, 'sect_D': {width:'66%', timer:0}, 'sect_E': {width:'83%', timer:10}, 'sect_F': {width:'100%', timer:0} };
     const answers = { 'B': {q1:'A', q2:'B'}, 'C': {q1:'C', q2:'A'}, 'E': {q1:'B', q2:'C'} };
     let selections = {};
 
     function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); else { alert("Wrong password."); document.getElementById('passInput').value = ""; } }
     function startCourse() { const n = document.getElementById('nameInput'); if(n.value.trim() === "") { alert("Enter name."); n.focus(); } else { localStorage.setItem('vName', n.value); document.getElementById('progressArea').classList.remove('d-none'); showSection('sect_A'); } }
-
-    function selectOpt(el, qId, val) {
-        el.parentElement.querySelectorAll('.option-box').forEach(o => o.classList.remove('selected'));
-        el.classList.add('selected');
-        selections[qId] = val;
-    }
-
-    function checkQuiz(sec, nextId) {
-        if(selections[sec+'1'] === answers[sec].q1 && selections[sec+'2'] === answers[sec].q2) showSection(nextId);
-        else alert("Incorrect or incomplete answers.");
-    }
+    function selectOpt(el, qId, val) { el.parentElement.querySelectorAll('.option-box').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); selections[qId] = val; }
+    function checkQuiz(sec, nextId) { if(selections[sec+'1'] === answers[sec].q1 && selections[sec+'2'] === answers[sec].q2) showSection(nextId); else alert("Incorrect or incomplete answers."); }
 
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        document.getElementById('currentTitle').innerText = sectionMap[id].title;
         document.getElementById('waterLevel').style.width = sectionMap[id].width;
         if(id === 'sect_F') document.getElementById('outName').innerText = localStorage.getItem('vName');
         
@@ -103,7 +102,6 @@
             btn.disabled = true;
             let interval = setInterval(() => {
                 timer--;
-                btn.innerText = "Wait " + timer + "s";
                 if(timer <= 0) { clearInterval(interval); btn.disabled = false; btn.innerText = "Proceed to Next"; btn.classList.replace('btn-secondary', 'btn-primary'); }
             }, 1000);
         } else if(id !== 'sect_D') document.querySelector('#'+id+' #nextBtn').disabled = false;
