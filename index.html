@@ -29,35 +29,37 @@
         </div>
         
         <div id="sect_login" class="section active">
-            <h1 class="h4 mb-3">Portal Access</h1>
+            <h1 class="h4 mb-3">Welcome to the E-learning Portal</h1>
             <input type="password" id="passInput" class="form-control mb-3" placeholder="Access Code">
             <button class="btn btn-primary w-100" onclick="login()">Enter Portal</button>
         </div>
 
         <div id="sect_instruct" class="section">
-            <h1 class="h4 mb-3">Welcome</h1>
+            <h1 class="h4 mb-3">Welcome!</h1>
             <div class="alert alert-info">
-                <strong>Instructions:</strong>
+                <strong>Instructions for volunteers :</strong>
                 <ul class="mb-0">
-                    <li>Watch each video carefully.</li>
-                    <li>Answer both quiz questions by clicking the options.</li>
-                    <li>The "Proceed" button will unlock automatically.</li>
+                    <li>1. You are required to watch all videos carefully.</li>
+                    <li>2. Please proceed to answer the quiz questions that follow.</li>
+                    <li>3. The "Proceed" button will unlock automatically after you've watched the video and answered all questions.</li>
+                    <li>4. Please do not refresh the page unnecessarily.</li>
+                    <li>5. Please keep a screenshot of the completion certificate at the end.</li>
                 </ul>
             </div>
             <input type="text" id="nameInput" class="form-control mb-3" placeholder="Your Full Name">
             <button class="btn btn-primary w-100" onclick="startCourse()">Begin Training</button>
         </div>
 
-        <div id="sect_A" class="section"><h2 class="h5">A: Introduction</h2>
-            <div class="video-desc">This video provides an overview of the organization.</div>
+        <div id="sect_A" class="section"><h2 class="h5">A: Introduction to Beyond</h2>
+            <div class="video-desc">This video provides an overview of our beginning, mission and vision. We will dive deeper into our approach and community in the subsequent sections. </div>
             <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_A" allowfullscreen></iframe></div>
             <button id="nextBtn" class="btn btn-secondary w-100" disabled onclick="showSection('sect_B')">Please wait...</button></div>
 
         <div id="sect_B" class="section"><h2 class="h5">B: Who do we serve?</h2>
-            <div class="video-desc">Learn about the community members we assist.</div>
+            <div class="video-desc">Learn about the community we serve! We refer to them as our members!In this section, we will explore the concept of relative and absolute poverty and how it affect our members.</div>
             <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_B" allowfullscreen></iframe></div>
-            <p>1. Question 1?</p><div id="group_B1"><div class="option-box" onclick="selectOpt(this, 'B1', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'B1', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'B1', 'C')">Option C</div></div>
-            <p class="mt-3">2. Question 2?</p><div id="group_B2"><div class="option-box" onclick="selectOpt(this, 'B2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'B2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'B2', 'C')">Option C</div></div>
+            <p>1. Despite our nation's progress and development, some of our community members still face difficulties in their daily lifes. What is the best explanation for this?</p><div id="group_B1"><div class="option-box" onclick="selectOpt(this, 'B1', 'A')">Intentional poor person decisions leading to undesirable outcomes</div><div class="option-box" onclick="selectOpt(this, 'B1', 'B')">Systematic barriers making it difficult for individuals to porgress</div><div class="option-box" onclick="selectOpt(this, 'B1', 'C')">Members live in despair and do not have a dream for the future</div></div>
+            <p class="mt-3">2. Many of our community members are said to be "marginalised". What does it mean to be "marginalised" in society? ?</p><div id="group_B2"><div class="option-box" onclick="selectOpt(this, 'B2', 'A')">They have been pushed to the edge of society and lack equal access to opportunities and resources</div><div class="option-box" onclick="selectOpt(this, 'B2', 'B')">They are individuals who have chosen to live separately from the rest of the community by preference</div><div class="option-box" onclick="selectOpt(this, 'B2', 'C')">They are people who have higher income levels than the average person but choose to live modestly</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('B', 'sect_C')">Submit</button></div>
 
         <div id="sect_C" class="section"><h2 class="h5">C: Rental Neighbourhoods</h2>
@@ -92,7 +94,7 @@
 
 <script>
     const sectionMap = { 'sect_A': {width:'16%', timer:10}, 'sect_B': {width:'33%', timer:10}, 'sect_C': {width:'50%', timer:10}, 'sect_D': {width:'66%', timer:0}, 'sect_E': {width:'83%', timer:10}, 'sect_F': {width:'100%', timer:0} };
-    const answers = { 'B': {q1:'A', q2:'B'}, 'C': {q1:'C', q2:'A'}, 'E': {q1:'B', q2:'C'} };
+    const answers = { 'B': {q1:'B', q2:'A'}, 'C': {q1:'C', q2:'A'}, 'E': {q1:'B', q2:'C'} };
     let selections = {};
 
     function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); else { alert("Wrong password."); document.getElementById('passInput').value = ""; } }
