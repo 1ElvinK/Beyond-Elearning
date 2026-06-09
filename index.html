@@ -93,7 +93,16 @@
         'sect_F': { title: 'F: Training Complete', width: '100%' }
     };
 
-    function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); }
+    function login() { 
+    const passInput = document.getElementById('passInput');
+    if(passInput.value === "Volunteer2026") {
+        showSection('sect_instruct');
+    } else {
+        // This triggers the alert and clears the field
+        alert("Incorrect password. Please try again.");
+        passInput.value = ""; 
+    }}    
+    
     function startCourse() { 
         localStorage.setItem('vName', document.getElementById('nameInput').value);
         document.getElementById('progressArea').classList.remove('d-none');
