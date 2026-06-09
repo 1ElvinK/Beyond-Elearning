@@ -17,13 +17,18 @@
         .option-box.selected { border-color: var(--primary); background: #eff6ff; font-weight: 700; color: var(--primary); }
         .btn-primary { background: var(--primary); border: none; padding: 12px; font-weight: 600; }
         .question-box {
-            background: #2563eb;    /* Blue background */
-            color: #ffffff;         /* White text */
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 400;       /* Normal weight (not bold) */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
+            background: #f8fafc; /* Very light grey */
+            border-left: 6px solid #2563eb; /* Blue accent stripe */
+            padding: 15px 20px;
+            color: #1e293b; /* Dark text */
+            margin-bottom: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .quiz-separator {
+            border-top: 2px solid #e2e8f0;
+            margin: 30px 0;
+            padding-top: 10px;
         }
     </style>
 </head>
@@ -68,6 +73,7 @@
             <div class="video-desc">Learn about the community we serve! We refer to them as our members!In this section, we will explore the concept of relative and absolute poverty and how it affect our members.</div>
             <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_B" allowfullscreen></iframe></div>
             <div class="question-box">Despite our nation's progress and development, some of our community members still face difficulties in their daily lifes. What is the best explanation for this?</div><div id="group_B1"><div class="option-box" onclick="selectOpt(this, 'B1', 'A')">Intentional poor person decisions leading to undesirable outcomes</div><div class="option-box" onclick="selectOpt(this, 'B1', 'B')">Systematic barriers making it difficult for individuals to porgress</div><div class="option-box" onclick="selectOpt(this, 'B1', 'C')">Members live in despair and do not have a dream for the future</div></div>
+            <div class="quiz-separator"></div>
             <div class="question-box">Many of our community members are said to be "marginalised". What does it mean to be "marginalised" in society? ?</div><div id="group_B2"><div class="option-box" onclick="selectOpt(this, 'B2', 'A')">They have been pushed to the edge of society and lack equal access to opportunities and resources</div><div class="option-box" onclick="selectOpt(this, 'B2', 'B')">They are individuals who have chosen to live separately from the rest of the community by preference</div><div class="option-box" onclick="selectOpt(this, 'B2', 'C')">They are people who have higher income levels than the average person but choose to live modestly</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('B', 'sect_C')">Submit</button></div>
 
