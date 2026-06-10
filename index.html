@@ -84,8 +84,25 @@
             <p class="mt-3">2. Question 2?</p><div id="group_C2"><div class="option-box" onclick="selectOpt(this, 'C2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'C2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'C2', 'C')">Option C</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('C', 'sect_D')">Submit</button></div>
 
-        <div id="sect_D" class="section"><h2 class="h5">D: What do you see?</h2><img src="Activity.PNG" class="img-fluid my-3" onclick="handleHotspot()" style="cursor:pointer;"><button id="nextBtn" class="btn btn-secondary w-100" disabled onclick="showSection('sect_E')">Click image to unlock</button></div>
-
+        <div id="sect_D" class="section">
+            <h2 class="h5">D: What do you see?</h2>
+            <div class="question-box">The illustration below shows a typical day in a rental neighbourhood. Click on the area which attracts your attention! </div>
+            <img src="Activity.PNG" usemap="#image-map" class="img-fluid my-3" style="cursor:pointer;">
+                <map name="image-map">
+                    <area shape="rect" coords="298,636,151,486" href="#" onclick="handleHotspot('weakness', 'Interesting observation! What you have identified is a isolated elderly living alone which is a common sight in rental neighbourhoods. While challenges exist, let’s try to focus on the positives.Click on an area which reflects the strengths of the community. ')" alt="Weakness">
+                    <area shape="rect" coords="1126,264,1416,448" href="#" onclick="handleHotspot('weakness', 'Interesting observation! What you have identified is a student struggling with his school work. Indeed, some students so face some challenges when it comes to academics. While challenges exist, let us try to focus on the community strengths.')" alt="Weakness">
+                    <area shape="rect" coords="365,529,557,745" href="#" onclick="handleHotspot('strength', 'These are neighbours helping out with the food distribution! Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                    <area shape="rect" coords="560,582,1054,766" href="#" onclick="handleHotspot('strength', 'Interesting! These are volunteers from the community helping out with our initiatives. Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                    <area shape="rect" coords="1098,522,1400,700" href="#" onclick="handleHotspot('strength', 'Right! This is out signature academic programme where students help one another with their school work! Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                    <area shape="rect" coords="786,327,1088,505" href="#" onclick="handleHotspot('strength', 'Interesting! These are community members hanging out in the neighbourhood garden! They bring with them their valuable skills and expertise! Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                    <area shape="rect" coords="1105,39,1407,217" href="#" onclick="handleHotspot('strength', 'Interesting! These are community members hanging out in the neighbourhood garden! They bring with them their valuable skills and expertise! Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                    <area shape="rect" coords="4,292,189,412" href="#" onclick="handleHotspot('strength', 'Interesting! These are our youths bonding over sports! They bring with them their valuable skills and expertise! Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                    <area shape="rect" coords="327,350,512,470" href="#" onclick="handleHotspot('strength', 'Interesting! These are community members hanging out in the community! They keep a look out for one another to ensure everyone is safe and healthy! Great eye! Our organization focuses on what is strong, not just what is wrong.')" alt="Strength">
+                </map>
+            <button id="nextBtn" class="btn btn-secondary w-100" disabled onclick="showSection('sect_E')">Proceed to Next</button>
+        </div>
+        
+        
         <div id="sect_E" class="section"><h2 class="h5">E: Our Approach</h2>
             <div class="video-desc">Final module covering our service strategy.</div>
             <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_E" allowfullscreen></iframe></div>
@@ -116,7 +133,19 @@
     function startCourse() { const n = document.getElementById('nameInput'); if(n.value.trim() === "") { alert("Enter name."); n.focus(); } else { localStorage.setItem('vName', n.value); document.getElementById('progressArea').classList.remove('d-none'); showSection('sect_A'); } }
     function selectOpt(el, qId, val) { el.parentElement.querySelectorAll('.option-box').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); selections[qId] = val; }
     function checkQuiz(sec, nextId) { if(selections[sec+'1'] === answers[sec].q1 && selections[sec+'2'] === answers[sec].q2) showSection(nextId); else alert("Incorrect or incomplete answers."); }
-
+    function handleHotspot(type, message) {
+            // Show the feedback message
+            alert(message);
+            
+            // Logic: Only unlock if the type is 'strength'
+            if (type === 'strength') {
+                const btn = document.querySelector('#sect_D #nextBtn');
+                btn.disabled = false;
+                btn.classList.replace('btn-secondary', 'btn-primary');
+                btn.innerText = "Proceed to Next";
+            }
+        }
+    
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
