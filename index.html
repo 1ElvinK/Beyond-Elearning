@@ -95,10 +95,13 @@
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('B', 'sect_C')">Submit</button></div>
 
         <div id="sect_C" class="section"><h2 class="h5">Section C: Rental Neighbourhoods</h2>
-            <div class="video-desc">Overview of the specific areas we work in.</div>
-            <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/VIDEO_ID_C" allowfullscreen></iframe></div>
-            <p>1. Question 1?</p><div id="group_C1"><div class="option-box" onclick="selectOpt(this, 'C1', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'C1', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'C1', 'C')">Option C</div></div>
-            <p class="mt-3">2. Question 2?</p><div id="group_C2"><div class="option-box" onclick="selectOpt(this, 'C2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'C2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'C2', 'C')">Option C</div></div>
+            <div class="video-desc">Our members mostly lives in rental neighbourhoods in central Singapore. How much do you know about rental neighbourhoods? Find out more in this section.</div>
+            <div class="ratio ratio-16x9 my-3"><video controls><source src="sectC.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
+            <div class="video-desc">The open-source video below provides a glimpse into the life of the youth living in a rental neighbourhood. Pay close attention not only to the stressors but also the community spirit exhibited.!</div>
+            <div class="ratio ratio-16x9 my-3"><iframe src="https://www.youtube.com/embed/WBGPQIukC-A" allowfullscreen></iframe></div>
+            <div class="question-box">According to Zakia, where do the youths turn to as their "safe space" when they are faced with problems??</div><div id="group_C1"><div class="option-box" onclick="selectOpt(this, 'C1', 'A')">Their Community</div><div class="option-box" onclick="selectOpt(this, 'C1', 'B')">Their Schools</div><div class="option-box" onclick="selectOpt(this, 'C1', 'C')">Their Relatives</div></div>
+            <div class="quiz-separator"></div>
+            <div class="question-box">According to Zakia, how did the youths express their emotions when they are feeling troubled?</div><div id="group_C2"><div class="option-box" onclick="selectOpt(this, 'C2', 'A')">Talking to a counsellor</div><div class="option-box" onclick="selectOpt(this, 'C2', 'B')">Drawing and Arts</div><div class="option-box" onclick="selectOpt(this, 'C2', 'C')">They keep it to themselves</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('C', 'sect_D')">Submit</button></div>
 
         <div id="sect_D" class="section">
@@ -146,7 +149,7 @@
 
 <script>
     const sectionMap = { 'sect_A': {width:'16%', timer:10}, 'sect_B': {width:'33%', timer:10}, 'sect_C': {width:'50%', timer:10}, 'sect_D': {width:'66%', timer:0}, 'sect_E': {width:'83%', timer:10}, 'sect_F': {width:'100%', timer:0} };
-    const answers = { 'B': {q1:'B', q2:'A'}, 'C': {q1:'C', q2:'A'}, 'E': {q1:'B', q2:'C'} };
+    const answers = { 'B': {q1:'B', q2:'A'}, 'C': {q1:'A', q2:'B'}, 'E': {q1:'B', q2:'C'} };
     let selections = {};
 
     function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); else { alert("Wrong password."); document.getElementById('passInput').value = ""; } }
