@@ -93,7 +93,7 @@
             <div class="ratio ratio-16x9 my-3"><video controls playsinline><source src="sectC.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
             <div class="video-desc">The open-source video below provides a glimpse into the life of the youth living in a rental neighbourhood. Pay close attention not only to the stressors but also the community spirit exhibited! Credit:@OGS.Offical</div>
             <div class="ratio ratio-16x9 my-3"><video controls playsinline><source src="Zakia.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
-            <div class="question-box">According to Zakia, where do the youths turn to as their "safe space" when they are faced with problems??</div><div id="group_C1"><div class="option-box" onclick="selectOpt(this, 'C1', 'A')">Their Community</div><div class="option-box" onclick="selectOpt(this, 'C1', 'B')">Their Schools</div><div class="option-box" onclick="selectOpt(this, 'C1', 'C')">Their Relatives</div></div>
+            <div class="question-box">According to Zakia, where do the youths turn to as their "safe space" when they are faced with problems?</div><div id="group_C1"><div class="option-box" onclick="selectOpt(this, 'C1', 'A')">Their Community</div><div class="option-box" onclick="selectOpt(this, 'C1', 'B')">Their Schools</div><div class="option-box" onclick="selectOpt(this, 'C1', 'C')">Their Relatives</div></div>
             <div class="quiz-separator"></div>
             <div class="question-box">According to Zakia, how did the youths express their emotions when they are feeling troubled?</div><div id="group_C2"><div class="option-box" onclick="selectOpt(this, 'C2', 'A')">Talking to a counsellor</div><div class="option-box" onclick="selectOpt(this, 'C2', 'B')">Drawing and Arts</div><div class="option-box" onclick="selectOpt(this, 'C2', 'C')">They keep it to themselves</div></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('C', 'sect_D')">Submit</button></div>
@@ -121,10 +121,14 @@
         
         
         <div id="sect_E" class="section"><h2 class="h5">Section E: Our Approach</h2>
-            <div class="video-desc">Final module covering our service strategy.</div>
+            <div class="video-desc">This final section highlights our approach and framework.</div>
             <div class="ratio ratio-16x9 my-3"><video controls playsinline><source src="sectE.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
-            <p>1. Question 1?</p><div id="group_E1"><div class="option-box" onclick="selectOpt(this, 'E1', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'E1', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'E1', 'C')">Option C</div></div>
-            <p class="mt-3">2. Question 2?</p><div id="group_E2"><div class="option-box" onclick="selectOpt(this, 'E2', 'A')">Option A</div><div class="option-box" onclick="selectOpt(this, 'E2', 'B')">Option B</div><div class="option-box" onclick="selectOpt(this, 'E2', 'C')">Option C</div></div>
+            <div class="question-box">At Beyond, we focus on ___________ .</div><div id="group_E1"><div class="option-box" onclick="selectOpt(this, 'E1', 'A')">What's Easy</div><div class="option-box" onclick="selectOpt(this, 'E1', 'B')">What's Wrong</div><div class="option-box" onclick="selectOpt(this, 'E1', 'C')">What's Strong</div></div>
+            <div class="quiz-separator"></div>
+            <div class="question-box">In the ABCD approach, an "asset" refers to:</div><div id="group_E2"><div class="option-box" onclick="selectOpt(this, 'E2', 'A')">Our member's rental flat and monetary belongings and tangible resources</div><div class="option-box" onclick="selectOpt(this, 'E2', 'B')">Our member's strengths, skills, talents, resources, passions, and interests</div><div class="option-box" onclick="selectOpt(this, 'E2', 'C')">Beyond's sponsors and donors but not limited to monetary contributions</div></div>
+            <div class="quiz-separator"></div>
+            <div class="video-desc">The video below shows one of our Neighbourhood Leaders Marlina featured on a CNA interview. Marlia initiated and with the help of our facilitation, started a patrol team and community fridge. Listen to what Marlina has to say! Credit:@channelnewsasia</div>
+            <div class="ratio ratio-16x9 my-3"><video controls playsinline><source src="marlina.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('E', 'sect_F')">Submit</button></div>
 
         <div id="sect_F" class="section">
@@ -143,7 +147,7 @@
 
 <script>
     const sectionMap = { 'sect_A': {width:'16%', timer:10}, 'sect_B': {width:'33%', timer:10}, 'sect_C': {width:'50%', timer:10}, 'sect_D': {width:'66%', timer:0}, 'sect_E': {width:'83%', timer:10}, 'sect_F': {width:'100%', timer:0} };
-    const answers = { 'B': {q1:'B', q2:'A'}, 'C': {q1:'A', q2:'B'}, 'E': {q1:'B', q2:'C'} };
+    const answers = { 'B': {q1:'B', q2:'A'}, 'C': {q1:'A', q2:'B'}, 'E': {q1:'C', q2:'B'} };
     let selections = {};
 
     function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); else { alert("Wrong password."); document.getElementById('passInput').value = ""; } }
