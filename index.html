@@ -16,6 +16,16 @@
         .option-box:hover { border-color: var(--primary); }
         .option-box.selected { border-color: var(--primary); background: #eff6ff; font-weight: 700; color: var(--primary); }
         .btn-primary { background: var(--primary); border: none; padding: 12px; font-weight: 600; }
+        .card-wrapper {
+                    height: 100px;
+                    cursor: pointer;
+                    position: relative;
+                    pointer-events: auto; /* Ensures the wrapper receives clicks */
+                }
+
+.card-back, .card-front {
+    pointer-events: none; /* Allows the click to pass through to the wrapper */
+}
         .question-box {
             background: #f8fafc; /* Very light grey */
             border-left: 6px solid #2563eb; /* Blue accent stripe */
@@ -231,8 +241,12 @@ function flipCard(card) {
                 if (flippedCards[0].dataset.name === flippedCards[1].dataset.name) {
                     flippedCards.forEach(c => c.classList.add('matched'));
                     matchedPairs++;
-                    if (matchedPairs === 3) { /* Enable Proceed Button */ }
-                } else {
+                    if (matchedPairs === 3) { 
+                        const btn = document.querySelector('#sect_F #nextBtn');
+                        btn.disabled = false;
+                        btn.classList.replace('btn-secondary', 'btn-primary');
+                        btn.innerText = "Proceed to Certificate" }
+                   } else {
                     flippedCards.forEach(c => c.classList.remove('flipped'));
                 }
                 flippedCards = [];
@@ -244,6 +258,9 @@ function flipCard(card) {
 function showModal(title, text) {
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalText').innerText = text;
+
+    var myModal = new bootstrap.Modal(document.getElementById('infoModal'));
+    myModal.show();
     new bootstrap.Modal(document.getElementById('infoModal')).show();
 }
     function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); else { alert("Wrong password."); document.getElementById('passInput').value = ""; } }
