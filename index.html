@@ -285,6 +285,13 @@ function showModal(title, text) {
 }
     
     function showSection(id) {
+        window.scrollTo(0, 0);
+
+        document.querySelectorAll('video').forEach(video => {
+        video.pause();
+        video.currentTime = 0; // Optional: Resets the video to the start
+            });
+        
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         document.getElementById('waterLevel').style.width = sectionMap[id].width;
