@@ -270,18 +270,19 @@ function showModal(title, text) {
     function startCourse() { const n = document.getElementById('nameInput'); if(n.value.trim() === "") { alert("Enter name."); n.focus(); } else { localStorage.setItem('vName', n.value); document.getElementById('progressArea').classList.remove('d-none'); showSection('sect_A'); } }
     function selectOpt(el, qId, val) { el.parentElement.querySelectorAll('.option-box').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); selections[qId] = val; }
     function checkQuiz(sec, nextId) { if(selections[sec+'1'] === answers[sec].q1 && selections[sec+'2'] === answers[sec].q2) showSection(nextId); else alert("Incorrect or incomplete answers."); }
+
     function handleHotspot(type, message) {
-            // Show the feedback message
-            alert(message);
-            
-            // Logic: Only unlock if the type is 'strength'
-            if (type === 'strength') {
-                const btn = document.querySelector('#sect_D #nextBtn');
-                btn.disabled = false;
-                btn.classList.replace('btn-secondary', 'btn-primary');
-                btn.innerText = "Proceed to Next";
-            }
-        }
+    // This calls your existing Modal function instead of the alert
+    showModal("Observation", message);
+    
+    // Logic: Only unlock if the type is 'strength'
+    if (type === 'strength') {
+        const btn = document.querySelector('#sect_D #nextBtn');
+        btn.disabled = false;
+        btn.classList.replace('btn-secondary', 'btn-primary');
+        btn.innerText = "Proceed to Next";
+    }
+}
     
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
