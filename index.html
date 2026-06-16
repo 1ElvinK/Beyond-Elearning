@@ -217,11 +217,11 @@ function initGame() {
 }
 
 function flipCard(card) {
-    // 1. If already matched, trigger the modal and check for mandatory click
+    // 1. If already matched, show the info and update click count
     if (card.classList.contains('matched')) {
-        // Only count this as a "viewed" match if it wasn't clicked before
+        // Only count if this specific match hasn't been "viewed" yet
         if (!card.classList.contains('viewed')) {
-            card.classList.add('viewed'); // Mark as viewed
+            card.classList.add('viewed');
             clickedMatches++;
             
             // Check if user has viewed all 3 pairs
@@ -246,6 +246,7 @@ function flipCard(card) {
                 if (flippedCards[0].dataset.name === flippedCards[1].dataset.name) {
                     flippedCards.forEach(c => c.classList.add('matched'));
                     matchedPairs++;
+                    // IMPORTANT: We REMOVED the button enabling logic from here!
                 } else {
                     flippedCards.forEach(c => c.classList.remove('flipped'));
                 }
@@ -254,6 +255,7 @@ function flipCard(card) {
         }
     }
 }
+    
 function showModal(title, text) {
     // 1. Update text
     document.getElementById('modalTitle').innerText = title;
