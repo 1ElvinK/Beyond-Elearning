@@ -190,9 +190,11 @@
     ];
 let flippedCards = [];
 let matchedPairs = 0;
+let clickedMatches = 0;
 
 function initGame() {
     matchedPairs = 0;
+    clickedMatches = 0;
     flippedCards = [];
     const grid = document.getElementById('memory-game');
     grid.innerHTML = '';
@@ -210,8 +212,21 @@ function initGame() {
 }
 
 function flipCard(card) {
-    // 1. If already matched, show the info!
+    // 1. If already matched, trigger the modal and check for mandatory click
     if (card.classList.contains('matched')) {
+        // Only count this as a "viewed" match if it wasn't clicked before
+        if (!card.classList.contains('viewed')) {
+            card.classList.add('viewed'); // Mark as viewed
+            clickedMatches++;
+            
+            // Check if user has viewed all 3 pairs
+            if (clickedMatches === 3) {
+                const btn = document.querySelector('#sect_F #nextBtn');
+                btn.disabled = false;
+                btn.classList.replace('btn-secondary', 'btn-primary');
+                btn.innerText = "Proceed to Certificate";
+            }
+        }
         showModal(card.dataset.title, card.dataset.text);
         return;
     }
@@ -226,12 +241,7 @@ function flipCard(card) {
                 if (flippedCards[0].dataset.name === flippedCards[1].dataset.name) {
                     flippedCards.forEach(c => c.classList.add('matched'));
                     matchedPairs++;
-                    if (matchedPairs === 3) { 
-                        const btn = document.querySelector('#sect_F #nextBtn');
-                        btn.disabled = false;
-                        btn.classList.replace('btn-secondary', 'btn-primary');
-                        btn.innerText = "Proceed to Certificate" }
-                   } else {
+                } else {
                     flippedCards.forEach(c => c.classList.remove('flipped'));
                 }
                 flippedCards = [];
@@ -239,7 +249,6 @@ function flipCard(card) {
         }
     }
 }
-
 function showModal(title, text) {
     // 1. Update text
     document.getElementById('modalTitle').innerText = title;
