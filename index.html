@@ -40,6 +40,14 @@
         .hotspot:hover {
             background: rgba(255, 255, 255, 0.2); /* Subtle highlight when hovering */
         }
+
+        .card-game { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .card-wrapper { height: 100px; cursor: pointer; position: relative; }
+        .card-back { height: 100px; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 2rem; }
+        .card-front { height: 100px; width: 100%; border-radius: 8px; display: none; object-fit: cover; }
+        .flipped .card-back { display: none; }
+        .flipped .card-front { display: block; }
+
         
     </style>
 </head>
@@ -127,11 +135,24 @@
             <div class="quiz-separator"></div>
             <div class="question-box">In the ABCD approach, an "asset" refers to:</div><div id="group_E2"><div class="option-box" onclick="selectOpt(this, 'E2', 'A')">Our member's rental flat and monetary belongings and tangible resources</div><div class="option-box" onclick="selectOpt(this, 'E2', 'B')">Our member's strengths, skills, talents, resources, passions, and interests</div><div class="option-box" onclick="selectOpt(this, 'E2', 'C')">Beyond's sponsors and donors but not limited to monetary contributions</div></div>
             <div class="quiz-separator"></div>
-            <div class="video-desc">The video below shows one of our Neighbourhood Leaders Marlina featured on a CNA interview. Marlia initiated and with the help of our facilitation, started a patrol team and community fridge. Listen to what Marlina has to say! Credit:@channelnewsasia</div>
+            <div class="video-desc">The video below shows one of our Neighbourhood Leaders Marlina featured on a CNA interview. Marlinaa initiated the programme and with the help of our facilitation, started a patrol team and community fridge. Listen to what Marlina has to say! Credit:@channelnewsasia</div>
             <div class="ratio ratio-16x9 my-3"><video controls playsinline><source src="marlina.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
             <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="checkQuiz('E', 'sect_F')">Submit</button></div>
 
-        <div id="sect_F" class="section">
+
+
+            <div id="sect_F" class="section"><h2 class="h5">Section F: Summary</h2>
+                <div class="video-desc">Before we end, it is important to familiarise yourself with our Code Of Conduct. Take a look at our Code of Conduct below:</div>
+                <img src="COC.jpg" alt="">
+                <div class="quiz-separator"></div>
+                <h2 class="h5">Memory Match: Key Takeaways</h2>
+                <div class="video-desc">Play the card flipping game below to help you consolidate your learning. Flip the cards and find the matching pairs!</div>
+                <div class="card-game" id="memory-game"></div>
+                <button id="nextBtn" class="btn btn-secondary w-100 mt-3" disabled onclick="showSection('sect_G')">Match all pairs to proceed</button>
+            </div>        
+
+
+        <div id="sect_G" class="section">
     <div id="certificate" style="border: 10px solid #2563eb; padding: 40px; text-align: center; background: #fff; max-width: 700px; margin: auto;">
         <h1 style="font-family: serif; font-size: 2.5rem; color: #2563eb; text-transform: uppercase;">Certificate of Completion</h1>
         <hr style="border: 1px solid #2563eb; margin: 20px 0;">
@@ -145,11 +166,86 @@
     </div>
 </div>
 
+<!-- Modal for reading more -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h5 id="modalTitle">Title</h5>
+        <p id="modalText">Detailed information goes here.</p>
+        <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
 <script>
-    const sectionMap = { 'sect_A': {width:'16%', timer:10}, 'sect_B': {width:'33%', timer:10}, 'sect_C': {width:'50%', timer:10}, 'sect_D': {width:'66%', timer:0}, 'sect_E': {width:'83%', timer:10}, 'sect_F': {width:'100%', timer:0} };
+    const sectionMap = { 'sect_A': {width:'14%', timer:10}, 'sect_B': {width:'28%', timer:10}, 'sect_C': {width:'42%', timer:10}, 'sect_D': {width:'57%', timer:0}, 'sect_E': {width:'71%', timer:10}, 'sect_F': {width:'85%', timer:0},'sect_G':{width:"100%",timer:10} };
     const answers = { 'B': {q1:'B', q2:'A'}, 'C': {q1:'A', q2:'B'}, 'E': {q1:'C', q2:'B'} };
     let selections = {};
 
+    const cardData = [
+    { name: 'c1', img: 'design1.jpg', title: 'Strength', text: 'Explanation of Strength...' },
+    { name: 'c1', img: 'design1.jpg', title: 'Strength', text: 'Explanation of Strength...' },
+    { name: 'c2', img: 'design2.jpg', title: 'Asset', text: 'Explanation of Asset...' },
+    { name: 'c2', img: 'design2.jpg', title: 'Asset', text: 'Explanation of Asset...' },
+    { name: 'c3', img: 'design3.jpg', title: 'Community', text: 'Explanation of Community...' },
+    { name: 'c3', img: 'design3.jpg', title: 'Community', text: 'Explanation of Community...' }
+    ];
+let flippedCards = [];
+let matchedPairs = 0;
+
+function initGame() {
+    matchedPairs = 0;
+    flippedCards = [];
+    const grid = document.getElementById('memory-game');
+    grid.innerHTML = '';
+    cardData.sort(() => Math.random() - 0.5);
+    cardData.forEach(item => {
+        grid.innerHTML += `
+            <div class="card-wrapper" onclick="flipCard(this)" 
+             data-name="${item.name}" 
+             data-title="${item.title}" 
+             data-text="${item.text}">
+            <div class="card-back">?</div>
+            <img src="${item.img}" class="card-front">
+        </div>`;
+    });
+}
+
+function flipCard(card) {
+    // 1. If already matched, show the info!
+    if (card.classList.contains('matched')) {
+        showModal(card.dataset.title, card.dataset.text);
+        return;
+    }
+
+    // 2. Normal flip logic
+    if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        flippedCards.push(card);
+        
+        if (flippedCards.length === 2) {
+            setTimeout(() => {
+                if (flippedCards[0].dataset.name === flippedCards[1].dataset.name) {
+                    flippedCards.forEach(c => c.classList.add('matched'));
+                    matchedPairs++;
+                    if (matchedPairs === 3) { /* Enable Proceed Button */ }
+                } else {
+                    flippedCards.forEach(c => c.classList.remove('flipped'));
+                }
+                flippedCards = [];
+            }, 800);
+        }
+    }
+}
+
+function showModal(title, text) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalText').innerText = text;
+    new bootstrap.Modal(document.getElementById('infoModal')).show();
+}
     function login() { if(document.getElementById('passInput').value === "Volunteer2026") showSection('sect_instruct'); else { alert("Wrong password."); document.getElementById('passInput').value = ""; } }
     function startCourse() { const n = document.getElementById('nameInput'); if(n.value.trim() === "") { alert("Enter name."); n.focus(); } else { localStorage.setItem('vName', n.value); document.getElementById('progressArea').classList.remove('d-none'); showSection('sect_A'); } }
     function selectOpt(el, qId, val) { el.parentElement.querySelectorAll('.option-box').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); selections[qId] = val; }
@@ -171,7 +267,8 @@
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         document.getElementById('waterLevel').style.width = sectionMap[id].width;
-        if(id === 'sect_F') {
+        if(id === 'sect_F') initGame();
+        if(id === 'sect_G') {
             document.getElementById('outName').innerText = localStorage.getItem('vName');
             const now = new Date();
             // Format: Date at Time
