@@ -285,35 +285,57 @@ function showModal(title, text) {
 }
     
     function showSection(id) {
-        window.scrollTo(0, 0);
+    // 1. Scroll to top with a tiny delay so it works even when Section F loads content
+    setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
 
-        document.querySelectorAll('video').forEach(video => {
+    // 2. Pause and reset all videos
+    document.querySelectorAll('video').forEach(video => {
         video.pause();
-        video.currentTime = 0; // Optional: Resets the video to the start
-            });
-        
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        document.getElementById('waterLevel').style.width = sectionMap[id].width;
-        if(id === 'sect_F') initGame();
-        if(id === 'sect_G') {
-            document.getElementById('outName').innerText = localStorage.getItem('vName');
-            const now = new Date();
-            // Format: Date at Time
-            document.getElementById('compDate').innerText = now.toLocaleDateString() + " at " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        }
-        
-        let timer = sectionMap[id].timer;
-        if(timer > 0) {
-            const btn = document.querySelector('#'+id+' #nextBtn');
-            btn.disabled = true;
-            let interval = setInterval(() => {
-                timer--;
-                if(timer <= 0) { clearInterval(interval); btn.disabled = false; btn.innerText = "Proceed to Next"; btn.classList.replace('btn-secondary', 'btn-primary'); }
-            }, 1000);
-        } else if(id !== 'sect_D' && id !== 'sect_F') document.querySelector('#'+id+' #nextBtn').disabled = false;
+        video.currentTime = 0;
+    });
+
+    // 3. Reset YouTube iframes
+    document.querySelectorAll('iframe').forEach(iframe => {
+        iframe.src = iframe.src;
+    });
+
+    // 4. Handle section visibility
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    
+    // 5. Update progress bar
+    document.getElementById('waterLevel').style.width = sectionMap[id].width;
+    
+    // 6. Section-specific logic
+    if(id === 'sect_F') initGame();
+    
+    if(id === 'sect_G') {
+        document.getElementById('outName').innerText = localStorage.getItem('vName');
+        const now = new Date();
+        document.getElementById('compDate').innerText = now.toLocaleDateString() + " at " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
     
+    // 7. Timer logic
+    let timer = sectionMap[id].timer;
+    if(timer > 0) {
+        const btn = document.querySelector('#'+id+' #nextBtn');
+        btn.disabled = true;
+        let interval = setInterval(() => {
+            timer--;
+            if(timer <= 0) { 
+                clearInterval(interval); 
+                btn.disabled = false; 
+                btn.innerText = "Proceed to Next"; 
+                btn.classList.replace('btn-secondary', 'btn-primary'); 
+            }
+        }, 1000);
+    } else if(id !== 'sect_D' && id !== 'sect_F') { 
+        // We added && id !== 'sect_F' so the button stays locked until game completion
+        document.querySelector('#'+id+' #nextBtn').disabled = false;
+    }
+}
 </script>
 </body>
 </html>
