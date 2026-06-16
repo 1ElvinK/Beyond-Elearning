@@ -303,7 +303,7 @@ function showModal(title, text) {
                 timer--;
                 if(timer <= 0) { clearInterval(interval); btn.disabled = false; btn.innerText = "Proceed to Next"; btn.classList.replace('btn-secondary', 'btn-primary'); }
             }, 1000);
-        } else if(id !== 'sect_D') document.querySelector('#'+id+' #nextBtn').disabled = false;
+        } else if(id !== 'sect_D' && id !== 'sect_F') document.querySelector('#'+id+' #nextBtn').disabled = false;
     }
     
 </script>
